@@ -2,6 +2,9 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
 import data from "../data.json";
+import markerIcon from "./markerIcon";
+
+L.Marker.prototype.options.icon = markerIcon;
 
 const map = L.map("map").setView([25.077855115246464, 121.55387115519812], 12);
 
