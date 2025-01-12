@@ -14,6 +14,7 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
 }).addTo(map);
 
 const abs_year = document.getElementById("abs_year") as HTMLSelectElement;
+const view_mode = document.getElementById("view_mode") as HTMLSelectElement;
 
 let geojson: L.GeoJSON | undefined = undefined;
 
@@ -23,24 +24,29 @@ function updateGeojson() {
   }
 
   geojson = L.geoJSON(
-  // @ts-ignore
-  data,
-  {
-    pointToLayer: function (geoJsonPoint, latlng) {
-        return L.circleMarker(latlng, { radius: Math.log(geoJsonPoint.properties[abs_year.value + "年"] / 100000) / Math.log(7) * 17 });
-    },
-    onEachFeature: function (feature, layer) {
+    // @ts-ignore
+    data,
+    {
+      pointToLayer: function (geoJsonPoint, latlng) {
+        if (view_mode.value === "log 7") {
+          return L.circleMarker(latlng, { radius: Math.log(geoJsonPoint.properties[abs_year.value + "年"] / 100000) / Math.log(7) * 17 });
+        } else {
+          return L.circleMarker(latlng, { radius: geoJsonPoint.properties[abs_year.value + "年"] / 100000 });
+        }
+      },
+      onEachFeature: function (feature, layer) {
         layer.bindPopup(feature.properties.名稱 + "\n" + feature.properties[abs_year.value + "年"] + "人");
         layer.bindTooltip(feature.properties.名稱);
-    },
-  }
-);
+      },
+    }
+  );
 
-geojson.addTo(map);
+  geojson.addTo(map);
 }
 
 // element hooks
 abs_year.addEventListener("change", updateGeojson);
+view_mode.addEventListener("change", updateGeojson);
 
 //lifespan hooks
 function onMounted() {
