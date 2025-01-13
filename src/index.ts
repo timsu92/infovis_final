@@ -35,8 +35,8 @@ function updateGeojson() {
         }
       },
       onEachFeature: function (feature, layer) {
-        layer.bindPopup(feature.properties.名稱 + "\n" + feature.properties[abs_year.value + "年"] + "人");
-        layer.bindTooltip(feature.properties.名稱);
+        layer.bindPopup(feature.properties.名稱 + " " + feature.properties[abs_year.value + "年"] + "人");
+        layer.bindTooltip(feature.properties.名稱 + " " + feature.properties[abs_year.value + "年"] + "人");
       },
     }
   );
