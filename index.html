@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-TW" data-theme="forest">
   <head>
     <meta charset="UTF-8" />
@@ -7,7 +7,7 @@
     <script type="module" src="/src/index.ts"></script>
   </head>
   <body>
-    <container class="mx-auto flex flex-row justify-center items-center">
+    <container class="mx-auto flex flex-row items-center justify-center">
       <div
         id="map"
         style="height: 40rem; width: 33rem; max-height: 40rem"
@@ -46,7 +46,10 @@
           <div class="label">
             <span class="label-text">檢視模式</span>
           </div>
-          <select class="select select-bordered select-primary w-full max-w-xs" id="view_mode">
+          <select
+            class="select select-bordered select-primary w-full max-w-xs"
+            id="view_mode"
+          >
             <option selected value="絕對數字">絕對數字</option>
             <option value="log 7">log 7</option>
           </select>
