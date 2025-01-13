@@ -29,16 +29,35 @@ function updateGeojson() {
     {
       pointToLayer: function (geoJsonPoint, latlng) {
         if (view_mode.value === "log 7") {
-          return L.circleMarker(latlng, { radius: Math.log(geoJsonPoint.properties[abs_year.value + "年"] / 100000) / Math.log(7) * 17 });
+          return L.circleMarker(latlng, {
+            radius:
+              (Math.log(
+                geoJsonPoint.properties[abs_year.value + "年"] / 100000,
+              ) /
+                Math.log(7)) *
+              17,
+          });
         } else {
-          return L.circleMarker(latlng, { radius: geoJsonPoint.properties[abs_year.value + "年"] / 100000 });
+          return L.circleMarker(latlng, {
+            radius: geoJsonPoint.properties[abs_year.value + "年"] / 100000,
+          });
         }
       },
       onEachFeature: function (feature, layer) {
-        layer.bindPopup(feature.properties.名稱 + " " + feature.properties[abs_year.value + "年"] + "人");
-        layer.bindTooltip(feature.properties.名稱 + " " + feature.properties[abs_year.value + "年"] + "人");
+        layer.bindPopup(
+          feature.properties.名稱 +
+            " " +
+            feature.properties[abs_year.value + "年"] +
+            "人",
+        );
+        layer.bindTooltip(
+          feature.properties.名稱 +
+            " " +
+            feature.properties[abs_year.value + "年"] +
+            "人",
+        );
       },
-    }
+    },
   );
 
   geojson.addTo(map);
