@@ -37,10 +37,21 @@ function updateGeojson() {
                 Math.log(7)) *
               17,
           });
-        } else {
+        } else if (view_mode.value === "絕對數字") {
           return L.circleMarker(latlng, {
             radius: geoJsonPoint.properties[abs_year.value + "年"] / 100000,
           });
+        } else if (view_mode.value === "Steven's Power Law") {
+          const k = 0.13;
+          return L.circleMarker(latlng, {
+            radius: Math.sqrt(
+              (k *
+                Math.pow(geoJsonPoint.properties[abs_year.value + "年"], 0.7)) /
+                Math.PI,
+            ),
+          });
+        } else {
+          throw new Error("no such view mode: " + view_mode.value);
         }
       },
       onEachFeature: function (feature, layer) {
