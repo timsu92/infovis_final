@@ -1,62 +1,172 @@
 <!doctype html>
-<html lang="zh-TW" data-theme="forest">
+<html lang="zh-TW" data-theme="retro">
   <head>
     <meta charset="UTF-8" />
     <title>group 10 final project</title>
     <link rel="stylesheet" href="/src/index.css" />
     <script type="module" src="/src/index.ts"></script>
   </head>
-  <body>
-    <container
-      class="flex flex-row place-content-center items-center justify-center gap-x-5"
-    >
-      <div
-        id="map"
-        style="height: 40rem; width: 35rem; max-height: 40rem"
-      ></div>
-      <container class="flex flex-col gap-y-7">
-        <!--選擇年份-->
-        <label class="form-control w-full max-w-xs">
-          <div class="label">
-            <span class="label-text">年份</span>
-          </div>
-          <select id="abs_year" class="select select-bordered select-primary">
-            <option value="2005">2005</option>
-            <option value="2006">2006</option>
-            <option value="2007">2007</option>
-            <option value="2008">2008</option>
-            <option value="2009">2009</option>
-            <option value="2010">2010</option>
-            <option value="2011">2011</option>
-            <option value="2012">2012</option>
-            <option value="2013">2013</option>
-            <option value="2014">2014</option>
-            <option value="2015">2015</option>
-            <option value="2016">2016</option>
-            <option value="2017">2017</option>
-            <option value="2018">2018</option>
-            <option value="2019">2019</option>
-            <option value="2020">2020</option>
-            <option value="2021">2021</option>
-            <option value="2022">2022</option>
-            <option value="2023">2023</option>
-            <option value="2024">2024</option>
-          </select>
-        </label>
-        <!--選擇檢視模式-->
-        <label class="form-control w-full max-w-xs">
-          <div class="label">
-            <span class="label-text">檢視模式</span>
-          </div>
-          <select
-            class="select select-bordered select-primary w-full max-w-xs"
-            id="view_mode"
-          >
-            <option selected value="絕對數字">絕對數字</option>
-            <option value="log 7">log 7</option>
-          </select>
-        </label>
+  <body
+    class="flex flex-row place-content-center items-center justify-center gap-x-5"
+  >
+    <div
+      id="map"
+      class="w-full max-w-xl"
+      style="height: 40rem; max-height: 40rem"
+    ></div>
+    <!--選擇顯示當年人數或是兩年人數比較-->
+    <div role="tablist" class="tabs tabs-lifted">
+      <!--單年人數-->
+      <input
+        type="radio"
+        name="what_data"
+        role="tab"
+        class="tab min-w-fit text-nowrap"
+        aria-label="單年人數"
+        id="tab1"
+        checked="checked"
+      />
+      <container
+        role="tabpanel"
+        class="tab-content rounded-box border-4 border-primary bg-base-100 p-4"
+      >
+        <container
+          class="flex flex-col place-content-center items-center justify-center gap-y-7"
+        >
+          <!--選擇年份-->
+          <label class="form-control w-full max-w-xs">
+            <div class="label">
+              <span class="label-text">年份</span>
+            </div>
+            <select id="abs_year" class="select select-bordered select-primary">
+              <option value="2005">2005</option>
+              <option value="2006">2006</option>
+              <option value="2007">2007</option>
+              <option value="2008">2008</option>
+              <option value="2009">2009</option>
+              <option value="2010">2010</option>
+              <option value="2011">2011</option>
+              <option value="2012">2012</option>
+              <option value="2013">2013</option>
+              <option value="2014">2014</option>
+              <option value="2015">2015</option>
+              <option value="2016">2016</option>
+              <option value="2017">2017</option>
+              <option value="2018">2018</option>
+              <option value="2019">2019</option>
+              <option value="2020">2020</option>
+              <option value="2021">2021</option>
+              <option value="2022">2022</option>
+              <option value="2023">2023</option>
+              <option value="2024">2024</option>
+            </select>
+          </label>
+          <!--選擇檢視模式-->
+          <label class="form-control w-full max-w-xs">
+            <div class="label">
+              <span class="label-text">檢視模式</span>
+            </div>
+            <select
+              class="select select-bordered select-primary w-full max-w-xs"
+              id="view_mode"
+            >
+              <option value="Steven's Power Law" selected>
+                Steven's Power Law
+              </option>
+              <option value="絕對數字">絕對數字</option>
+              <option value="log 7">log 7</option>
+            </select>
+          </label>
+        </container>
       </container>
-    </container>
+
+      <!--兩年人數比較-->
+      <input
+        type="radio"
+        name="what_data"
+        role="tab"
+        class="tab min-w-fit text-nowrap"
+        aria-label="兩年人數比較"
+        id="tab2"
+      />
+      <container
+        role="tabpanel"
+        class="tab-content rounded-box border-4 border-primary bg-base-100 p-4"
+      >
+        <container
+          class="flex flex-col place-content-center items-center justify-center gap-y-7"
+        >
+          <!--選擇年份-->
+          <label class="form-control w-full max-w-xs">
+            <div class="label">
+              <span class="label-text">年份</span>
+            </div>
+            <select
+              id="from_year"
+              class="select select-bordered select-primary"
+            >
+              <option value="2005">2005</option>
+              <option value="2006">2006</option>
+              <option value="2007">2007</option>
+              <option value="2008">2008</option>
+              <option value="2009">2009</option>
+              <option value="2010">2010</option>
+              <option value="2011">2011</option>
+              <option value="2012">2012</option>
+              <option value="2013">2013</option>
+              <option value="2014">2014</option>
+              <option value="2015">2015</option>
+              <option value="2016">2016</option>
+              <option value="2017">2017</option>
+              <option value="2018">2018</option>
+              <option value="2019">2019</option>
+              <option value="2020">2020</option>
+              <option value="2021">2021</option>
+              <option value="2022">2022</option>
+              <option value="2023" selected>2023</option>
+              <option value="2024">2024</option>
+            </select>
+            <select id="to_year" class="select select-bordered select-primary">
+              <option value="2005">2005</option>
+              <option value="2006">2006</option>
+              <option value="2007">2007</option>
+              <option value="2008">2008</option>
+              <option value="2009">2009</option>
+              <option value="2010">2010</option>
+              <option value="2011">2011</option>
+              <option value="2012">2012</option>
+              <option value="2013">2013</option>
+              <option value="2014">2014</option>
+              <option value="2015">2015</option>
+              <option value="2016">2016</option>
+              <option value="2017">2017</option>
+              <option value="2018">2018</option>
+              <option value="2019">2019</option>
+              <option value="2020">2020</option>
+              <option value="2021">2021</option>
+              <option value="2022">2022</option>
+              <option value="2023">2023</option>
+              <option value="2024" selected>2024</option>
+            </select>
+          </label>
+          <!--選擇檢視模式-->
+          <label class="form-control w-full max-w-xs">
+            <div class="label">
+              <span class="label-text">檢視模式</span>
+            </div>
+            <select
+              class="select select-bordered select-primary w-full max-w-xs"
+              id="view_mode2"
+            >
+              <option value="Steven's Power Law" selected>
+                Steven's Power Law
+              </option>
+              <option value="絕對數字">絕對數字</option>
+              <option value="log 7">log 7</option>
+            </select>
+          </label>
+        </container>
+      </container>
+    </div>
   </body>
 </html>
